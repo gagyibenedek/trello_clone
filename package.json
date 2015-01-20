@@ -1,0 +1,9 @@
+{
+  "name": "trello",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.16.0",
+    "grunt-contrib-concat": "~0.5.0"
+  }
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Trello</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+
+    <script src="app/scripts/controllers/main.js"></script>
+</head>
+<body ng-app="trello">
+<div ng-controller="MainController">
+
+    <ul>
+        <li ng-repeat="message in messages">
+            <!-- exit a message -->
+            <input ng-model="message.text" ng-change="messages.$save(message)"/>
+            <!-- delete message -->
+            <button ng-click="messages.$remove(message)">X</button>
+        </li>
+    </ul>
+    <!-- push a new message into the array -->
+    <form ng-submit="addMessage(newMessageText)">
+        <input ng-model="newMessageText"/>
+        <button type="submit">add message</button>
+    </form>
+
+</div>
+</body>
+</html>
