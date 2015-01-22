@@ -3,7 +3,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             sass: {
-                files: ['/app/**/*.{scss,sass}'],
+                files: ['app/**/*.scss'],
                 tasks: ['sass:dist']
             },
             concat: {
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['js/*.js'],
-                dest: 'dist/app.js'
+                src: ['app/components/main.js','app/components/*/*.js'],
+                dest: 'app/dist/app.js'
             }
         }
     });

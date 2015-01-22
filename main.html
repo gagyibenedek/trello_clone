@@ -3,28 +3,34 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Trello</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-    <!-- Firebase -->
-    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-    <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
 
-    <script src="app/scripts/controllers/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="app/dist/app.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400,300' rel='stylesheet' type='text/css'>
 </head>
 <body ng-app="trello">
 <div ng-controller="MainController">
 
-    <ul>
-        <li ng-repeat="card in cards">
-            <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
-        </li>
-    </ul>
-    <!-- push a new message into the array -->
-    <form ng-submit="addMessage(newMessageText)">
-        <input ng-model="newMessageText"/>
-        <button type="submit">add message</button>
-    </form>
+    <div class="list-wrapper shadow-level-1">
+        <ul class="list">
+            <li ng-repeat="card in cards">
+                <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
+            </li>
+        </ul>
+        <!-- push a new message into the array -->
+        <form ng-submit="addCard(newTitle)">
+            <input ng-model="newTitle"/>
+            <button type="submit">add message</button>
+        </form>
+    </div>
 
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.1/angularfire.min.js"></script>
+<script src="app/dist/app.js"></script>
 </body>
 </html>

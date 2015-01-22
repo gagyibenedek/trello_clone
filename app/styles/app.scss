@@ -1,5 +1,13 @@
-$color: #ddd;
+@import '_variables.scss';
+@import '_mixins.scss';
+
+@import '../components/list/_list.scss';
+@import '../components/card/_card.scss';
 
 body {
-  background-color: $color;
+  background-color: $color-primary;
+  margin: 0;
+  font-family: $font-family;
 }
+
+@include iconFont();

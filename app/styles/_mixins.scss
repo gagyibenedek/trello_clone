@@ -1,0 +1,48 @@
+@mixin iconFont() {
+  @font-face {
+    font-family: 'icon';
+    src: url('../assets/icons/icomoon.eot');
+    src: url('../assets/icons/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('../assets/icons/icomoon.woff') format('woff'),
+    url('../assets/icons/icomoon.ttf') format('truetype'),
+    url('../assets/icons/icomoon.svg#icomoon') format('svg');
+  }
+}
+
+@mixin icon(){
+  font-family: 'icon';
+  speak: none;
+}
+
+@mixin noselect() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin shadow($level) {
+  @if $level == 1 {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+  @if $level == 2 {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  @if $level == 3 {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+  @if $level == 4 {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  @if $level == 5 {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  }
+}
+
+@for $i from 1 through 5 {
+  .shadow-level-#{$i} {
+    @include shadow($i);
+  }
+}

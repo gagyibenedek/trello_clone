@@ -1,0 +1,86 @@
+.card {
+  width: 100%;
+  background-color: $color-primary-dark;
+  box-sizing: border-box;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  color: $color-light;
+  font-size: $font-size-m;
+  position: relative;
+
+  &:hover {
+    @include shadow(3);
+    margin-left: 2px;
+  }
+
+  .edit-area {
+    border: 2px white solid;
+    width: 80%;
+    resize: none;
+    overflow: hidden;
+
+    .input {
+      font-size: $font-size-m;
+      width: 100%;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: $color-light;
+    }
+
+    .description {
+      font-size: $font-size-s;
+      width: 100%;
+      font-family: $font-family;
+      color: $color-light;
+      resize: none;
+      overflow: hidden;
+    }
+  }
+
+  .buttons-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .button {
+    background: transparent;
+    font-size: $font-size-l;
+    border: 0;
+    padding: 0;
+    color: $color-light;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .delete:before {
+    @include icon();
+    content: 'd';
+  }
+
+  .save:before {
+    @include icon();
+    content: 'c';
+  }
+
+  .edit:before {
+    @include icon();
+    content: 'b';
+  }
+
+  .read-only-text {
+    @include noselect();
+    cursor: default;
+    border-bottom: 2px $color-primary-dark solid; //compensate input field border
+
+    &:hover {
+      color: $color-accent;
+      cursor: pointer;
+    }
+  }
+}

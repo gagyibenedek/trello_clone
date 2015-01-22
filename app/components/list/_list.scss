@@ -1,0 +1,13 @@
+.list-wrapper {
+  width: 100%;
+  max-width: 400px;
+  border: 4px $color-light solid;
+  background-color: $color-primary;
+
+  .list {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+  }
+}
+

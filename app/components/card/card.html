@@ -1,0 +1,16 @@
+<div class="card shadow-level-2">
+    <form ng-submit="editCard()">
+        <div class="edit-area" ng-hide="readOnly">
+            <input ng-model="ngModel.title" ng-readony="{{readOnly}}" class="input"/>
+            <textarea ng-model="ngModel.description" class="input description" maxlength="65"></textarea>
+        </div>
+
+        <span ng-show="readOnly" ng-click="flipReadOnly()" class="read-only-text">{{ngModel.title}}</span>
+
+        <div class="buttons-wrapper">
+            <button type="button" ng-click="flipReadOnly()" ng-show="readOnly" class="button edit"></button>
+            <button type="button" ng-click="editCard()" ng-hide="readOnly" class="button save"></button>
+            <button type="button" ng-click="delete(ngModel)" class="button delete"></button>
+        </div>
+    </form>
+</div>
