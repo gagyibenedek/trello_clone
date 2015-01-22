@@ -10,18 +10,7 @@
 <body ng-app="trello">
 <div ng-controller="MainController">
 
-    <div class="list-wrapper shadow-level-1">
-        <ul class="list">
-            <li ng-repeat="card in cards">
-                <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
-            </li>
-        </ul>
-        <!-- push a new message into the array -->
-        <form ng-submit="addCard(newTitle)">
-            <input ng-model="newTitle"/>
-            <button type="submit">add message</button>
-        </form>
-    </div>
+    <div list ng-model="list"></div>
 
 </div>
 

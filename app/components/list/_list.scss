@@ -1,13 +1,47 @@
 .list-wrapper {
   width: 100%;
   max-width: 400px;
+  margin: 10px;
   border: 4px $color-light solid;
   background-color: $color-primary;
+
+  .list-title{
+    text-align: center;
+    color: $color-light;
+    margin: 5px 0;
+  }
 
   .list {
     list-style: none;
     padding: 5px;
     margin: 0;
+  }
+
+  .open-creator {
+    color: $color-light;
+    font-size: $font-size-m;
+    margin: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+.new-card {
+  background-color: $color-primary-dark;
+  border-radius: $border-radius;
+  margin: 5px;
+  padding: 0 5px;
+  position: relative;
+
+  .buttons-wrapper {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 }
 

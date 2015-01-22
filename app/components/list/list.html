@@ -1,0 +1,23 @@
+<div class="list-wrapper shadow-level-1">
+    <h1 class="list-title">{{ngModel.title}}</h1>
+    <ul class="list">
+        <li ng-repeat="card in ngModel">
+            <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
+        </li>
+    </ul>
+    <form ng-submit="addCard()">
+        <div class="new-card" ng-show="creatorVisible">
+            <input ng-model="newCard.title" class="input" placeholder="Title"/>
+            <textarea ng-model="newCard.description" class="input description" maxlength="65"
+                      placeholder="Description goes here..."></textarea>
+
+            <div class="buttons-wrapper">
+                <button type="button" ng-click="addCard()" class="button add"></button>
+                <button type="button" ng-click="clear()" class="button delete"></button>
+            </div>
+        </div>
+        <div class="open-creator" ng-click="flipCreatorVisible()" ng-hide="creatorVisible">
+            Add new card...
+        </div>
+    </form>
+</div>

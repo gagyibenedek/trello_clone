@@ -1,6 +1,8 @@
 @import '_variables.scss';
 @import '_mixins.scss';
 
+@import '../components/common/_common.scss';
+
 @import '../components/list/_list.scss';
 @import '../components/card/_card.scss';
 

@@ -1,0 +1,53 @@
+.input {
+  font-size: $font-size-m;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: $color-light;
+
+  &:focus {
+    color: $color-accent;
+  }
+}
+
+.description {
+  font-size: $font-size-s;
+  font-family: $font-family;
+  color: $color-light;
+  resize: none;
+  overflow: hidden;
+}
+
+.button {
+  background: transparent;
+  font-size: $font-size-l;
+  border: 0;
+  padding: 0;
+  color: $color-light;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.add:before {
+  @include icon();
+  content: 'a';
+}
+
+.delete:before {
+  @include icon();
+  content: 'd';
+}
+
+.save:before {
+  @include icon();
+  content: 'c';
+}
+
+.edit:before {
+  @include icon();
+  content: 'b';
+}

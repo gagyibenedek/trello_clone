@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 tasks: ['sass:dist']
             },
             concat: {
-                files: ['js/*.js'],
+                files: ['app/factories/*.js', 'app/components/*/*.js'],
                 tasks: ['concat']
             }
         },
@@ -27,12 +27,12 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['app/components/main.js','app/components/*/*.js'],
+                src: ['app/components/main.js','app/factories/*.js','app/components/*/*.js'],
                 dest: 'app/dist/app.js'
             }
         }
     });
-    grunt.registerTask('default', [ 'sass:dist', 'watch']);
+    grunt.registerTask('default', ['concat', 'sass:dist', 'watch']);
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
