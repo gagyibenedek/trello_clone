@@ -10,8 +10,6 @@ angular.module('trello').directive('list', ['dataAccessFactory', function (dataA
       scope.newCard = {};
       scope.creatorVisible = false;
 
-      console.log(scope.ngModel);
-
       scope.flipCreatorVisible = function(){
         scope.creatorVisible = !scope.creatorVisible;
       }

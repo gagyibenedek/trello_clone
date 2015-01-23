@@ -64,8 +64,6 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
       scope.newCard = {};
       scope.creatorVisible = false;
 
-      console.log(scope.ngModel);
-
       scope.flipCreatorVisible = function(){
         scope.creatorVisible = !scope.creatorVisible;
       }
