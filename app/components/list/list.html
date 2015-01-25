@@ -1,7 +1,7 @@
 <div class="list-wrapper shadow-level-1">
     <h1 class="list-title">{{ngModel.title}}</h1>
     <ul class="list">
-        <li ng-repeat="card in ngModel">
+        <li ng-repeat="card in cards | filter: {parent: ngModel.$id}">
             <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
         </li>
     </ul>

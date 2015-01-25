@@ -2,6 +2,10 @@ angular.module('trello', ['firebase']);
 
 angular.module('trello').controller('MainController', ['$scope', 'dataAccessFactory',
   function ($scope, dataAccessFactory) {
-    $scope.list = dataAccessFactory.createNewList();
-    $scope.list.title = "I'm a list!";
+    $scope.lists = dataAccessFactory.getLists();
+    $scope.cards = dataAccessFactory.getCards();
+
+    $scope.addList = function(){
+      dataAccessFactory.addList();
+    }
 }]);

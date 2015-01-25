@@ -3,7 +3,8 @@ angular.module('trello').directive('list', ['dataAccessFactory', function (dataA
     restrict: 'A',
     require: ['^ngModel'],
     scope: {
-      ngModel: '='
+      ngModel: '=',
+      cards: '='
     },
     templateUrl: 'app/components/list/list.html',
     link: function (scope, ele, attr) {
@@ -28,11 +29,11 @@ angular.module('trello').directive('list', ['dataAccessFactory', function (dataA
       }
 
       scope.editCard = function (card) {
-        dataAccessFactory.editCard(scope.ngModel, card);
+        dataAccessFactory.editCard(card);
       }
 
       scope.deleteCard = function (card) {
-        dataAccessFactory.deleteCard(scope.ngModel, card);
+        dataAccessFactory.deleteCard(card);
       }
     }
   }

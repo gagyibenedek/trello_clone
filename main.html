@@ -9,9 +9,10 @@
 </head>
 <body ng-app="trello">
 <div ng-controller="MainController">
-
-    <div list ng-model="list"></div>
-
+    <button type="button" ng-click="addList()">++</button>
+    <div ng-repeat="list in lists">
+        <div list ng-model="list" cards="cards"></div>
+    </div>
 </div>
 
 

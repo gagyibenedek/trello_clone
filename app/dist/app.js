@@ -2,30 +2,57 @@ angular.module('trello', ['firebase']);
 
 angular.module('trello').controller('MainController', ['$scope', 'dataAccessFactory',
   function ($scope, dataAccessFactory) {
-    $scope.list = dataAccessFactory.createNewList();
-    $scope.list.title = "I'm a list!";
+    $scope.lists = dataAccessFactory.getLists();
+    $scope.cards = dataAccessFactory.getCards();
+
+    $scope.addList = function(){
+      dataAccessFactory.addList();
+    }
 }]);;angular.module('trello')
   .factory('dataAccessFactory', ['$firebase', function($firebase){
-    var ref = new Firebase("https://amber-heat-6761.firebaseio.com/");
-    var sync = $firebase(ref);
+    var baseURL = "https://trello2.firebaseio.com/",
+      lists = $firebase(new Firebase(baseURL + "lists")).$asArray(),
+      cards = $firebase(new Firebase(baseURL + "cards")).$asArray(),
+      daf = {};
 
-    var daf = {};
+    //Lists
 
-    daf.createNewList = function(){
-      var list =  sync.$asArray();
-      return list;
+    daf.getLists = function(){
+      return lists;
+    }
+
+    daf.addList = function(){
+      var list = {};
+      list.title = '';
+      lists.$add(list);
+    }
+
+    daf.editList = function(list){
+      lists.$save(list);
+    }
+
+    daf.deleteList = function(list){
+      //TODO: REMOVE ALL CARDS BEFORE REMOVING THE LIST
+      lists.$remove(list);
+    }
+
+    //Cards
+
+    daf.getCards = function(){
+      return cards;
     }
 
     daf.addCard = function (list, card) {
-      list.$add(card);
+      card.parent = list.$id;
+      cards.$add(card);
     }
 
-    daf.editCard = function (list, card) {
-      list.$save(card);
+    daf.editCard = function (card) {
+      cards.$save(card);
     }
 
-    daf.deleteCard = function (list, card) {
-      list.$remove(card);
+    daf.deleteCard = function (card) {
+      cards.$remove(card);
     }
 
     return daf;
@@ -57,7 +84,8 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
     restrict: 'A',
     require: ['^ngModel'],
     scope: {
-      ngModel: '='
+      ngModel: '=',
+      cards: '='
     },
     templateUrl: 'app/components/list/list.html',
     link: function (scope, ele, attr) {
@@ -82,11 +110,11 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
       }
 
       scope.editCard = function (card) {
-        dataAccessFactory.editCard(scope.ngModel, card);
+        dataAccessFactory.editCard(card);
       }
 
       scope.deleteCard = function (card) {
-        dataAccessFactory.deleteCard(scope.ngModel, card);
+        dataAccessFactory.deleteCard(card);
       }
     }
   }
