@@ -37,4 +37,27 @@
       cursor: pointer;
     }
   }
+
+  .due-date-specify {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .delete-due-date {
+    float: right;
+  }
+
+  .overdue {
+    width: 10%;
+    height: 2px;
+    margin: -3px auto 0 auto;
+  }
+
+  .overdue-ok {
+    background-color: $color-ok;
+  }
+
+  .overdue-nok {
+    background-color: $color-warning;
+  }
 }

@@ -27,7 +27,8 @@ module.exports = function (grunt) {
         separator: ';'
       },
       dist: {
-        src: ['app/components/main.js', 'app/factories/*.js', 'app/components/*/*.js'],
+        src: ['app/assets/angular-pickadate/angular-pickadate.js', 'app/components/main.js',
+          'app/factories/*.js', 'app/components/*/*.js'],
         dest: 'app/dist/app.js'
       }
     },

@@ -1,4 +1,8 @@
 <div class="card shadow-level-2">
+    <div ng-show="ngModel.dueDate">
+        <div ng-show="isOverdue()" class="overdue overdue-nok"></div>
+        <div ng-hide="isOverdue()" class="overdue overdue-ok"></div>
+    </div>
     <form ng-submit="editCard()">
         <div class="edit-area" ng-hide="readOnly">
             <input ng-model="ngModel.title" ng-readony="{{readOnly}}" class="input"/>
@@ -12,6 +16,18 @@
             <button type="button" ng-click="editCard()" ng-hide="readOnly" class="button save"></button>
             <button type="button" ng-click="delete(ngModel)" ng-show="readOnly" class="button delete"></button>
             <button type="button" ng-click="flipReadOnly(ngModel)" ng-hide="readOnly" class="button delete"></button>
+        </div>
+
+        <div ng-hide="readOnly" class="due-date">
+            <div ng-show="ngModel.dueDate">
+                <span>Due date: {{ngModel.dueDate}}</span>
+
+                <div pickadate ng-model="ngModel.dueDate" no-extra-rows></div>
+            </div>
+
+            <div ng-click="specifyDueDate()" ng-hide="ngModel.dueDate" class="due-date-specify">
+                Specify due date...
+            </div>
         </div>
     </form>
 </div>

@@ -1,4 +1,4 @@
-angular.module('trello', ['firebase']);
+angular.module('trello', ['firebase', 'pickadate']);
 
 angular.module('trello').controller('MainController', ['$scope', 'dataAccessFactory',
   function ($scope, dataAccessFactory) {
