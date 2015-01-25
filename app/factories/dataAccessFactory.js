@@ -1,5 +1,5 @@
 angular.module('trello')
-  .factory('dataAccessFactory', ['$firebase', function($firebase){
+  .factory('dataAccessFactory', ['$firebase', function ($firebase) {
     var baseURL = "https://trello2.firebaseio.com/",
       lists = $firebase(new Firebase(baseURL + "lists")).$asArray(),
       cards = $firebase(new Firebase(baseURL + "cards")).$asArray(),
@@ -7,28 +7,35 @@ angular.module('trello')
 
     //Lists
 
-    daf.getLists = function(){
+    daf.getLists = function () {
       return lists;
     }
 
-    daf.addList = function(){
+    daf.addList = function (title) {
       var list = {};
-      list.title = '';
+      list.title = title;
       lists.$add(list);
     }
 
-    daf.editList = function(list){
+    daf.editList = function (list) {
       lists.$save(list);
     }
 
-    daf.deleteList = function(list){
-      //TODO: REMOVE ALL CARDS BEFORE REMOVING THE LIST
-      lists.$remove(list);
+    daf.deleteList = function (list) {
+      lists.$remove(list).then(function () {
+        //when the list was successfully deleted, remove it's cards also
+        var i;
+        for (i = cards.length; i--; i >= 0) {
+          if(cards[i].parent === list.$id){
+            cards.$remove(i);
+          }
+        }
+      });
     }
 
     //Cards
 
-    daf.getCards = function(){
+    daf.getCards = function () {
       return cards;
     }
 

@@ -1,13 +1,18 @@
+@import '../assets/bootstrap/_variables.scss';
+@import '../assets/bootstrap/_mixins.scss';
+
 @import '_variables.scss';
 @import '_mixins.scss';
 
 @import '../components/common/_common.scss';
 
+@import '../components/_main.scss';
+
 @import '../components/list/_list.scss';
 @import '../components/card/_card.scss';
 
 body {
-  background-color: $color-primary;
+  background-color: $color-primary-dark;
   margin: 0;
   font-family: $font-family;
 }

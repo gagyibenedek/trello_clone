@@ -2,16 +2,35 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trello</title>
 
     <link rel="stylesheet" type="text/css" href="app/dist/app.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400,300' rel='stylesheet' type='text/css'>
 </head>
 <body ng-app="trello">
-<div ng-controller="MainController">
-    <button type="button" ng-click="addList()">++</button>
-    <div ng-repeat="list in lists">
-        <div list ng-model="list" cards="cards"></div>
+<div ng-controller="MainController" class="board">
+    <div ng-repeat="list in lists" class="list-wrapper-flex">
+        <div list ng-model="list" cards="cards" class="list-wrapper shadow-level-1"></div>
+    </div>
+
+    <div class="list-wrapper-flex">
+        <div class="list-wrapper shadow-level-1">
+            <span ng-click="flipCreatorVisible()" ng-hide="creatorVisible" class="open-creator">
+                Add new list...
+            </span>
+
+            <div ng-show="creatorVisible" class="list-creator">
+                <form ng-submit="addList()">
+                    <input ng-model="newListTitle" class="input new-title" placeholder="List title">
+
+                    <div class="buttons-wrapper">
+                        <button type="button" ng-click="addList()" class="button add"></button>
+                        <button type="button" ng-click="clear()" class="button delete"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

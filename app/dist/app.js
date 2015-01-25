@@ -5,11 +5,27 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
     $scope.lists = dataAccessFactory.getLists();
     $scope.cards = dataAccessFactory.getCards();
 
-    $scope.addList = function(){
-      dataAccessFactory.addList();
+    $scope.creatorVisible = false;
+    $scope.newListTitle = '';
+
+    $scope.flipCreatorVisible = function () {
+      $scope.creatorVisible = !$scope.creatorVisible;
     }
-}]);;angular.module('trello')
-  .factory('dataAccessFactory', ['$firebase', function($firebase){
+
+    $scope.clear = function () {
+      $scope.newListTitle = '';
+      $scope.flipCreatorVisible();
+    }
+
+    $scope.addList = function () {
+      if (!$scope.newListTitle) {
+        $scope.newListTitle = "This is a default title!";
+      }
+      dataAccessFactory.addList($scope.newListTitle);
+      $scope.clear();
+    }
+  }]);;angular.module('trello')
+  .factory('dataAccessFactory', ['$firebase', function ($firebase) {
     var baseURL = "https://trello2.firebaseio.com/",
       lists = $firebase(new Firebase(baseURL + "lists")).$asArray(),
       cards = $firebase(new Firebase(baseURL + "cards")).$asArray(),
@@ -17,28 +33,35 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
 
     //Lists
 
-    daf.getLists = function(){
+    daf.getLists = function () {
       return lists;
     }
 
-    daf.addList = function(){
+    daf.addList = function (title) {
       var list = {};
-      list.title = '';
+      list.title = title;
       lists.$add(list);
     }
 
-    daf.editList = function(list){
+    daf.editList = function (list) {
       lists.$save(list);
     }
 
-    daf.deleteList = function(list){
-      //TODO: REMOVE ALL CARDS BEFORE REMOVING THE LIST
-      lists.$remove(list);
+    daf.deleteList = function (list) {
+      lists.$remove(list).then(function () {
+        //when the list was successfully deleted, remove it's cards also
+        var i;
+        for (i = cards.length; i--; i >= 0) {
+          if(cards[i].parent === list.$id){
+            cards.$remove(i);
+          }
+        }
+      });
     }
 
     //Cards
 
-    daf.getCards = function(){
+    daf.getCards = function () {
       return cards;
     }
 
@@ -91,14 +114,27 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
     link: function (scope, ele, attr) {
       scope.newCard = {};
       scope.creatorVisible = false;
+      scope.titleEditable = false;
+      scope.editedTitle = scope.ngModel.title;
 
       scope.flipCreatorVisible = function(){
         scope.creatorVisible = !scope.creatorVisible;
       }
 
+      scope.flipTitleEditable = function(){
+        scope.editedTitle = scope.ngModel.title;
+        scope.titleEditable = !scope.titleEditable;
+      }
+
       scope.clear = function(){
         scope.newCard = {};
         scope.flipCreatorVisible();
+      }
+
+      scope.editTitle = function(){
+        scope.ngModel.title = scope.editedTitle;
+        dataAccessFactory.editList(scope.ngModel);
+        scope.flipTitleEditable();
       }
 
       scope.addCard = function () {
@@ -115,6 +151,10 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
 
       scope.deleteCard = function (card) {
         dataAccessFactory.deleteCard(card);
+      }
+
+      scope.deleteList = function () {
+        dataAccessFactory.deleteList(scope.ngModel);
       }
     }
   }

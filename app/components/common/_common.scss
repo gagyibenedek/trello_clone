@@ -19,6 +19,13 @@
   overflow: hidden;
 }
 
+.buttons-wrapper {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
 .button {
   background: transparent;
   font-size: $font-size-l;
@@ -50,4 +57,16 @@
 .edit:before {
   @include icon();
   content: 'b';
+}
+
+.open-creator {
+  color: $color-light;
+  font-size: $font-size-m;
+  margin: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-accent;
+  }
 }

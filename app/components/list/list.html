@@ -1,23 +1,34 @@
-<div class="list-wrapper shadow-level-1">
-    <h1 class="list-title">{{ngModel.title}}</h1>
-    <ul class="list">
-        <li ng-repeat="card in cards | filter: {parent: ngModel.$id}">
-            <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
-        </li>
-    </ul>
-    <form ng-submit="addCard()">
-        <div class="new-card" ng-show="creatorVisible">
-            <input ng-model="newCard.title" class="input" placeholder="Title"/>
-            <textarea ng-model="newCard.description" class="input description" maxlength="65"
-                      placeholder="Description goes here..."></textarea>
+<button type="button" ng-click="deleteList()" class="button delete delete-list"></button>
 
-            <div class="buttons-wrapper">
-                <button type="button" ng-click="addCard()" class="button add"></button>
-                <button type="button" ng-click="clear()" class="button delete"></button>
-            </div>
-        </div>
-        <div class="open-creator" ng-click="flipCreatorVisible()" ng-hide="creatorVisible">
-            Add new card...
+<h1 class="list-title" ng-click="flipTitleEditable()" ng-hide="titleEditable">{{ngModel.title}}</h1>
+<div ng-show="titleEditable" class="title-editor shadow-level-1">
+    <form ng-submit="editTitle()">
+        <input ng-model="editedTitle" class="input title-editor-input">
+
+        <div class="buttons-wrapper title-editor-buttons">
+            <button type="button" ng-click="editTitle()" class="button save"></button>
+            <button type="button" ng-click="flipTitleEditable()" class="button delete"></button>
         </div>
     </form>
 </div>
+
+<ul class="list">
+    <li ng-repeat="card in cards | filter: {parent: ngModel.$id}">
+        <div card ng-model="card" delete="deleteCard(card)" edit="editCard(card)"></div>
+    </li>
+</ul>
+<form ng-submit="addCard()">
+    <div ng-show="creatorVisible" class="new-card shadow-level-1">
+        <input ng-model="newCard.title" class="input" placeholder="Title"/>
+        <textarea ng-model="newCard.description" class="input description" maxlength="65"
+                  placeholder="Description goes here..."></textarea>
+
+        <div class="buttons-wrapper">
+            <button type="button" ng-click="addCard()" class="button add"></button>
+            <button type="button" ng-click="clear()" class="button delete"></button>
+        </div>
+    </div>
+    <div class="open-creator" ng-click="flipCreatorVisible()" ng-hide="creatorVisible">
+        Add new card...
+    </div>
+</form>

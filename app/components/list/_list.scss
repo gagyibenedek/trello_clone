@@ -1,14 +1,38 @@
 .list-wrapper {
   width: 100%;
   max-width: 400px;
-  margin: 10px;
-  border: 4px $color-light solid;
+  margin: 0 auto;
+  border-radius: $border-radius;
   background-color: $color-primary;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
 
-  .list-title{
+  .list-title {
     text-align: center;
     color: $color-light;
     margin: 5px 0;
+    cursor: pointer;
+    word-wrap: break-word;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+  .title-editor {
+    position: relative;
+    background-color: $color-primary-dark;
+    margin-top: 10px;
+    border-radius: $border-radius;
+    padding: 2px 5px;
+
+    .title-editor-buttons {
+      bottom: auto;
+    }
+
+    .title-editor-input {
+      width: 80%;
+    }
   }
 
   .list {
@@ -17,17 +41,13 @@
     margin: 0;
   }
 
-  .open-creator {
-    color: $color-light;
-    font-size: $font-size-m;
-    margin: 5px;
-    text-decoration: underline;
-    cursor: pointer;
-
-    &:hover {
-      color: $color-accent;
-    }
+  .delete-list {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    outline: none;
   }
+
 }
 
 .new-card {
@@ -36,12 +56,5 @@
   margin: 5px;
   padding: 0 5px;
   position: relative;
-
-  .buttons-wrapper {
-    display: inline-block;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
 }
 

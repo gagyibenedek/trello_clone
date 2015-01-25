@@ -10,14 +10,27 @@ angular.module('trello').directive('list', ['dataAccessFactory', function (dataA
     link: function (scope, ele, attr) {
       scope.newCard = {};
       scope.creatorVisible = false;
+      scope.titleEditable = false;
+      scope.editedTitle = scope.ngModel.title;
 
       scope.flipCreatorVisible = function(){
         scope.creatorVisible = !scope.creatorVisible;
       }
 
+      scope.flipTitleEditable = function(){
+        scope.editedTitle = scope.ngModel.title;
+        scope.titleEditable = !scope.titleEditable;
+      }
+
       scope.clear = function(){
         scope.newCard = {};
         scope.flipCreatorVisible();
+      }
+
+      scope.editTitle = function(){
+        scope.ngModel.title = scope.editedTitle;
+        dataAccessFactory.editList(scope.ngModel);
+        scope.flipTitleEditable();
       }
 
       scope.addCard = function () {
@@ -34,6 +47,10 @@ angular.module('trello').directive('list', ['dataAccessFactory', function (dataA
 
       scope.deleteCard = function (card) {
         dataAccessFactory.deleteCard(card);
+      }
+
+      scope.deleteList = function () {
+        dataAccessFactory.deleteList(scope.ngModel);
       }
     }
   }

@@ -1,0 +1,27 @@
+.board {
+  @include make-row();
+
+  .list-wrapper-flex {
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+    @include make-md-column(4);
+    @include make-lg-column(4);
+
+    display: inline-block;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .list-creator {
+    background-color: $color-primary-dark;
+    position: relative;
+    padding-bottom: 40px;
+
+    .new-title {
+      width: 90%;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+}
+
