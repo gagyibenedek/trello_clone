@@ -6,16 +6,17 @@
     <form ng-submit="editCard()">
         <div class="edit-area" ng-hide="readOnly">
             <input ng-model="ngModel.title" ng-readony="{{readOnly}}" class="input"/>
-            <textarea ng-model="ngModel.description" class="input description" maxlength="65"></textarea>
+            <div contenteditable ng-model="ngModel.description" placeholder="Description goes here..."
+                 class="input description"></div>
         </div>
 
         <span ng-show="readOnly" ng-click="flipReadOnly()" class="read-only-text">{{ngModel.title}}</span>
 
         <div class="buttons-wrapper">
-            <button type="button" ng-click="flipReadOnly()" ng-show="readOnly" class="button edit"></button>
+            <button type="button" ng-click="startEditing()" ng-show="readOnly" class="button edit"></button>
             <button type="button" ng-click="editCard()" ng-hide="readOnly" class="button save"></button>
             <button type="button" ng-click="delete(ngModel)" ng-show="readOnly" class="button delete"></button>
-            <button type="button" ng-click="flipReadOnly(ngModel)" ng-hide="readOnly" class="button delete"></button>
+            <button type="button" ng-click="cancelEditing()" ng-hide="readOnly" class="button delete"></button>
         </div>
 
         <div ng-hide="readOnly" class="due-date">

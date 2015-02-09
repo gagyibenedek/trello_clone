@@ -3,11 +3,14 @@
   width: 100%;
   background: transparent;
   border: 0;
+  border-bottom: 1px $color-light solid;
   padding: 0;
   color: $color-light;
+  outline: none;
 
   &:focus {
     color: $color-accent;
+    border-bottom: 3px $color-accent solid;
   }
 }
 

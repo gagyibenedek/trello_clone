@@ -357,8 +357,20 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
     link: function (scope, ele, attr) {
       scope.readOnly = true;
 
+      scope.startEditing = function(){
+        scope.oldTitle = scope.ngModel.title;
+        scope.oldDesc = scope.ngModel.description;
+        scope.flipReadOnly();
+      }
+
       scope.editCard = function () {
         scope.edit(scope.ngModel);
+        scope.flipReadOnly();
+      }
+
+      scope.cancelEditing = function(){
+        scope.ngModel.title = scope.oldTitle;
+        scope.ngModel.description = scope.oldDesc;
         scope.flipReadOnly();
       }
 
@@ -366,7 +378,7 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
         scope.readOnly = !scope.readOnly;
       }
 
-      scope.specifyDueDate = function() {
+      scope.specifyDueDate = function () {
         var d = new Date(),
           today = d.getFullYear() + ' - ' + (d.getMonth() + 1) + ' - ' + d.getDate();
 
@@ -374,30 +386,67 @@ angular.module('trello').controller('MainController', ['$scope', 'dataAccessFact
         scope.ngModel.dueDate = today;
       }
 
-      scope.isOverdue = function(){
-        if(scope.ngModel.dueDate){
+      scope.isOverdue = function () {
+        if (scope.ngModel.dueDate) {
           var d = new Date(),
             due = scope.ngModel.dueDate.split('-');
 
-          if(due[1][0] === '0'){
+          if (due[1][0] === '0') {
             due[1] = due[1][1];
           }
 
-          if(d.getFullYear() < due[0]){
+          if (d.getFullYear() < due[0]) {
             return false;
           }
-          if(d.getFullYear() == due[0] && (d.getMonth() + 1) < due[1]){
+          if (d.getFullYear() == due[0] && (d.getMonth() + 1) < due[1]) {
             return false;
           }
-          if(d.getFullYear() == due[0] && (d.getMonth() + 1) == due[1] && d.getDate() < due[2]){
+          if (d.getFullYear() == due[0] && (d.getMonth() + 1) == due[1] && d.getDate() < due[2]) {
             return false;
           }
           return true;
         }
         return false;
       };
+
     }
   }
+});;angular.module('trello').directive('contenteditable', function () {
+  return {
+    require: 'ngModel',
+    scope: {
+      ngModel: '=',
+      placeholder: '@'
+    },
+    link: function (scope, element, attrs, ctrl) {
+      // view -> model
+
+      element.bind('blur', function () {
+        var clean = element.html().replace(new RegExp(/\s/g),'')
+          .replace(new RegExp("&nbsp;", "g"), "")
+          .replace(new RegExp("<br>", "g"), "");
+        if(!clean.length){
+          element.html('');
+        }
+
+        scope.$apply(function () {
+          ctrl.$setViewValue(element.html());
+        });
+      });
+
+      element.bind('focus', function () {
+        if(element.html() === ''){
+          element.html('<br />');
+        }
+      });
+
+      ctrl.$render = function () {
+        element.html(ctrl.$viewValue || '');
+      };
+
+      ctrl.$render();
+    }
+  };
 });;angular.module('trello').directive('list', ['dataAccessFactory', function (dataAccessFactory) {
   return {
     restrict: 'A',

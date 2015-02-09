@@ -20,8 +20,8 @@
 <form ng-submit="addCard()">
     <div ng-show="creatorVisible" class="new-card shadow-level-1">
         <input ng-model="newCard.title" class="input" placeholder="Title"/>
-        <textarea ng-model="newCard.description" class="input description" maxlength="65"
-                  placeholder="Description goes here..."></textarea>
+        <div contenteditable ng-model="newCard.description" placeholder="Description goes here..."
+             class="input description">{{newCard.description}}</div>
 
         <div class="buttons-wrapper">
             <button type="button" ng-click="addCard()" class="button add"></button>

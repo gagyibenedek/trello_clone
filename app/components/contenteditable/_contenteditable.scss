@@ -1,0 +1,12 @@
+div[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: $color-grey;
+}
+
+div[placeholder]:empty:focus:before {
+  content: "";
+}
+
+.input {
+  min-height: 24px;
+}
